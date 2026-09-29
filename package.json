@@ -1,0 +1,15 @@
+﻿{
+  "name": "farmshare",
+  "version": "1.0.0",
+  "description": "FarmShare - Agricultural Equipment Sharing Platform for Rural Communities",
+  "scripts": {
+    "server": "node server/src/index.js",
+    "client": "npm run dev --prefix client",
+    "test": "node server/test_api.js",
+    "seed": "node server/src/utils/seed.js",
+    "build": "npm run build --prefix client"
+  },
+  "keywords": ["agriculture", "equipment-rental", "farming", "rural-tech"],
+  "author": "FarmShare Team",
+  "license": "MIT"
+}
