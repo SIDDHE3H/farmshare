@@ -5,6 +5,7 @@ import api from '../api/client';
 import { formatCurrency, formatDate } from '../utils/formatters';
 import StatusBadge from '../components/StatusBadge';
 import { useToast } from '../context/ToastContext';
+import { getMediaUrl } from '../utils/media';
 
 export default function RequestsReceived() {
   const [requests, setRequests] = useState([]);
@@ -89,9 +90,7 @@ export default function RequestsReceived() {
         <div className="space-y-4">
           {requests.map((req) => {
             const isActing = actionLoadingId === req.id;
-            const imageUrl = req.equipment_image.startsWith('/uploads')
-              ? `http://localhost:5000${req.equipment_image}`
-              : req.equipment_image;
+            const imageUrl = getMediaUrl(req.equipment_image);
 
             return (
               <div

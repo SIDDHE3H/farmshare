@@ -5,6 +5,7 @@ import api from '../api/client';
 import { formatCurrency, formatLocation, formatDate } from '../utils/formatters';
 import ConfirmModal from '../components/ConfirmModal';
 import { useToast } from '../context/ToastContext';
+import { getMediaUrl } from '../utils/media';
 
 export default function MyListings() {
   const [equipment, setEquipment] = useState([]);
@@ -91,9 +92,7 @@ export default function MyListings() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {equipment.map((item) => {
-            const imageUrl = item.image_url.startsWith('/uploads')
-              ? `http://localhost:5000${item.image_url}`
-              : item.image_url;
+            const imageUrl = getMediaUrl(item.image_url);
 
             return (
               <div

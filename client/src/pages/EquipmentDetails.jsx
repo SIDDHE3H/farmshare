@@ -17,6 +17,7 @@ import api from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { formatCurrency, formatDate, formatLocation } from '../utils/formatters';
 import RequestModal from '../components/RequestModal';
+import { getMediaUrl } from '../utils/media';
 
 export default function EquipmentDetails() {
   const { id } = useParams();
@@ -76,9 +77,7 @@ export default function EquipmentDetails() {
   }
 
   const isOwner = user && user.id === equipment.owner_id;
-  const imageUrl = equipment.image_url.startsWith('/uploads')
-    ? `http://localhost:5000${equipment.image_url}`
-    : equipment.image_url;
+  const imageUrl = getMediaUrl(equipment.image_url);
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">

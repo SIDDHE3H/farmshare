@@ -2,11 +2,10 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Tag, User } from 'lucide-react';
 import { formatCurrency, formatLocation } from '../utils/formatters';
+import { getMediaUrl } from '../utils/media';
 
 export default function EquipmentCard({ item }) {
-  const imageUrl = item.image_url && item.image_url.startsWith('/uploads')
-    ? `http://localhost:5000${item.image_url}`
-    : item.image_url;
+  const imageUrl = getMediaUrl(item.image_url);
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group">

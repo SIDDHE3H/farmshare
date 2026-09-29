@@ -5,6 +5,7 @@ import api from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { CATEGORIES, CONDITIONS } from '../utils/formatters';
+import { getMediaUrl } from '../utils/media';
 
 export default function EditEquipment() {
   const { id } = useParams();
@@ -49,10 +50,7 @@ export default function EditEquipment() {
           status: item.status
         });
 
-        const img = item.image_url.startsWith('/uploads')
-          ? `http://localhost:5000${item.image_url}`
-          : item.image_url;
-        setPreviewUrl(img);
+        setPreviewUrl(getMediaUrl(item.image_url));
       } catch (err) {
         console.error('Error fetching equipment for edit:', err);
         setError('Equipment not found or access denied.');

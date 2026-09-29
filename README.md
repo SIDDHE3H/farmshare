@@ -256,18 +256,12 @@ Expected output:
 
 ---
 
-## 🌐 Production Deployment Guide
+## 🌐 Production Deployment on Render
 
-1. **Frontend (Vercel / Netlify / Cloudflare Pages)**:
-   - Build command: `npm run build`
-   - Output directory: `dist`
-   - Set environment variable: `VITE_API_URL=https://your-backend-api.com/api`
+This repository includes `render.yaml` for a single public Render web service. The service builds the Vite client, serves it from Express, and exposes the API at `/api`.
 
-2. **Backend (Render / Railway / Fly.io / DigitalOcean)**:
-   - Start command: `node src/index.js`
-   - Set environment variables:
-     - `PORT=5000`
-     - `JWT_SECRET=your_production_secret`
-     - `DATABASE_FILE=farmshare.sqlite`
-     - `CLIENT_URL=https://your-frontend-domain.com`
-   - For PostgreSQL in production, set `DATABASE_URL` and swap the DB driver if desired.
+1. Push the repository to GitHub.
+2. In Render, choose **New → Blueprint**, connect the repository, and apply `render.yaml`.
+3. Open the generated `https://...onrender.com` URL.
+
+The blueprint generates `JWT_SECRET` automatically and uses SQLite plus local uploads. Render's free plan has ephemeral storage, so database records and uploaded files can be reset after a redeploy or instance restart. Use a paid Render persistent disk, or migrate the database and uploads to managed storage, before treating this as a production data store.

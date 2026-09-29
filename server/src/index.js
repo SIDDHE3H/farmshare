@@ -12,6 +12,7 @@ const statsRoutes = require('./routes/statsRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const clientDistDir = path.resolve(__dirname, '../../client/dist');
 
 // Middleware
 app.use(cors());
@@ -32,6 +33,14 @@ app.use('/api/stats', statsRoutes);
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', name: 'FarmShare API', version: '1.0.0' });
 });
+
+// Serve the production frontend when the client has been built for Render.
+if (require('fs').existsSync(clientDistDir)) {
+  app.use(express.static(clientDistDir));
+  app.get(/^(?!\/api(?:\/|$)).*/, (req, res) => {
+    res.sendFile(path.join(clientDistDir, 'index.html'));
+  });
+}
 
 // Global Error Handler
 app.use((err, req, res, next) => {

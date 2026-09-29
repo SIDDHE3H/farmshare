@@ -6,6 +6,7 @@ import { formatCurrency, formatDate, formatLocation } from '../utils/formatters'
 import StatusBadge from '../components/StatusBadge';
 import ConfirmModal from '../components/ConfirmModal';
 import { useToast } from '../context/ToastContext';
+import { getMediaUrl } from '../utils/media';
 
 export default function MyRequests() {
   const [requests, setRequests] = useState([]);
@@ -91,9 +92,7 @@ export default function MyRequests() {
       ) : (
         <div className="space-y-4">
           {requests.map((req) => {
-            const imageUrl = req.equipment_image.startsWith('/uploads')
-              ? `http://localhost:5000${req.equipment_image}`
-              : req.equipment_image;
+            const imageUrl = getMediaUrl(req.equipment_image);
 
             return (
               <div
