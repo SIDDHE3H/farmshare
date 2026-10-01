@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://farmshare-9y07.onrender.com/sitemap.xml
