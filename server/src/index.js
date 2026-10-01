@@ -19,6 +19,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain').send(
+    `User-agent: *\nAllow: /\n\nSitemap: https://farmshare-9y07.onrender.com/sitemap.xml\n`
+  );
+});
+
 // Serve uploaded files statically
 const uploadsDir = path.resolve(__dirname, '../uploads');
 app.use('/uploads', express.static(uploadsDir));
